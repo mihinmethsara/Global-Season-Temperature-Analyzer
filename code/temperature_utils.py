@@ -75,3 +75,32 @@ def check_city_temperature(city, temp, time_of_day):
     return message
 
 
+def compare_with_perth(city, temp, time_of_day):
+    
+    city = city.strip().title()
+    time_of_day = time_of_day.lower()
+
+    
+    if city not in CITY_AVERAGES: #check city valid
+        return "Invalid city"
+
+    
+    if time_of_day not in ["morning", "afternoon"]: #check valid time
+        return "Invalid time of day"
+
+
+    #get Perth average
+    perth_average = CITY_AVERAGES["Perth"][time_of_day]
+
+
+     #compare  values with perth
+
+    if temp > perth_average:
+        return f"{city} is warmer than Perth"
+
+
+    elif temp < perth_average:
+        return f"{city} is cooler than Perth"
+ 
+    else:
+        return f"{city} is the same as Perth"
