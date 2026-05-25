@@ -41,7 +41,6 @@ I identified three main modules for the season functionality following good modu
 
 **Exceptions:** Handled by returning error messages.
 
-
 ### Module 3:
 
 **Module Name:** `check_seasons_same`
