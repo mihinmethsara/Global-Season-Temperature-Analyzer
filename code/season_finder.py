@@ -3,7 +3,7 @@ from input_validator import normalize_country, normalize_month, is_valid_country
 
 
 def get_meteorological_season(country, month):  #get meteorological or monsoon season for  country
-    
+    #use parameter passing
     
     country_norm = normalize_country(country) #validate inputs
     if not country_norm or not is_valid_country(country_norm):
@@ -45,5 +45,5 @@ def get_traditional_season(country, month):
         if month_norm in month_list:
             return season_name
     
-    
+
     return "No traditional season for this month"

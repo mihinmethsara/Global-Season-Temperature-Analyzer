@@ -7,7 +7,7 @@ def check_seasons_same(country1, country2, month):
     season1 = get_meteorological_season(country1, month)
     season2 = get_meteorological_season(country2, month)
     
-    print(f"\n--- Season Comparison Result ---")
+    print(f"\n--- Season comparison result ---")
     print(f"{country1} in {month}: {season1}")
     print(f"{country2} in {month}: {season2}")
     
