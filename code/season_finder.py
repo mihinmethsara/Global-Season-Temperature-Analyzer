@@ -35,7 +35,7 @@ def get_traditional_season(country, month):
     if country_norm != "Australia":  #check country is only ausralia
         return "No traditional season for this country"
     
-    
+
     
     month_norm = normalize_month(month)
     if month_norm is None:
@@ -44,5 +44,6 @@ def get_traditional_season(country, month):
     for season_name, month_list in NOONGAR_SEASONS.items():
         if month_norm in month_list:
             return season_name
+    
     
     return "No traditional season for this month"
