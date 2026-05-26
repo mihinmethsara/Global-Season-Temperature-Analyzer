@@ -40,24 +40,3 @@ def check_city_temperature(city, temp, time_of_day):  #use parameter pass
 
 
 
-def get_temperature_from_keyboard():
-    
-     #get temperature from keyboard input for test
-    
-    print("\n=== Temperature checker ===")
-    city = input("Enter city name: ")
-    temp_input = input("Enter temperature: ")
-    time_of_day = input("Enter time of day (morning/afternoon): ")
-
-
-    try:
-        temp = float(temp_input)
-    except ValueError:
-        result = f"Invalid temperature: '{temp_input}' is not a number"
-        print(result)
-        return result
-    
-
-    result = check_city_temperature(city, temp, time_of_day)
-    print(result)  #console output and return use
-    return result

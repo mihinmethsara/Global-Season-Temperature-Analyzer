@@ -24,21 +24,3 @@ def compare_with_perth(city, temp, time_of_day): #parameter pass
         return f"{city_norm} is the same as Perth"
 
 
-def compare_with_perth_interactive():
-     #compare with perth using keyboard input
-    
-    print("\n---compare with perth---")
-    city = input("Enter city name: ")
-    temp_input = input("Enter temperature: ")
-    time_of_day = input("Enter time of day (morning/afternoon): ")
-    
-    try:
-        temp = float(temp_input)
-    except ValueError:
-        result = f"Invalid temperature: '{temp_input}' is not a number"
-        print(result)
-        return result
-    
-    result = compare_with_perth(city, temp, time_of_day)
-    print(result)   #output console
-    return result
