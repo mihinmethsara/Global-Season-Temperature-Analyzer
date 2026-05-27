@@ -246,6 +246,7 @@ Added file output feature: A function was added to write season comparison resul
 
 
 
+<br>
 
 
 
@@ -255,9 +256,181 @@ Added file output feature: A function was added to write season comparison resul
 
 
 
+## <u>Test cases for all parts </u>
+
+## Black box test cases
+
+### 1.Equivalence partitioning 
+
+- I identified different types of behaviour from each module’s specification and selected one test case for each type. This helps ensure all main behaviours are tested.
+
+#### Season finder - meteorological seasons
+
+| Module | Category | Test Data  | Expected Result  |
+|--------|----------|-----------|-----------------|
+| get_meteorological_season| Australia Summer | "australia", "january" | summer |
+| get_meteorological_season | Australia Autumn | "australia", "april"    | autumn  |
+| get_meteorological_season  | Australia Winter   | "australia", "july" | winter |
+| check_seasons_same | same season | "Australia", "Japan", "January"  | true |
+| check_city_temperature| above average | "Perth", 25.0, "morning" | contains "above" |
+| check_city_temperature | invalid city | "Sydney", 25.0, "morning"  | invalid city |
+
+
+- This technique divides all possible inputs to categories that  expected to produce  same behaviour.Instead of testing every possible input becaus it not practical I select one representative value from each category. for example, testing "january" represents all summer months (december, january,february).If the module works correctly for january,it should also work for the other months  same group.This approach saves time while still helping to find important bugs.
+
+<br>
 
 
 
+### 2.Boundary value analysis 
+
+| Module | Boundary | Test Data | Expected Result |
+|--------|----------|-----------|-----------------|
+| check_city_temperature | 6 c | "Perth", 24.2, "morning" | No "significant difference" |
+| check_city_temperature| above 6  | "Perth", 24.3, "morning" | show "significant difference" |
+| check_city_temperature  | above min avg | "Perth", 1.0, "morning" | no "below minimum" |
+| check_city_temperature | below min avg | "Perth", 0.6, "morning" | show  "below minimum" |
+
+- bva focuses on testing values at the edges where behaviour changes because many mistakes happen  these boundary points. For example rule says the warning  triggered only when the difference more than 6c , so I test values like  exact boundary and just above it to check it works correctly. I also test values just below and just above perths minimum  and maximum  to make sure the system handles limits properly.
+
+<br>
+
+
+### 3.Student data tests
+
+ Test Data | Expected Result   |
+|-----------|-----------------|
+| get_meteorological_season("Australia", 1)`  | summer |
+| get_meteorological_season("Australia", 0)` | invalid month  |
+| check_city_temperature("Perth", 2.0, "morning" ) | below average   |
+| check_city_temperature("Prathapasinghe", 25.0, "morning") |  invalid city |
+
+- using my id digits and last name as test data, I used digit 1 as month 1 it get january- summer , digit 0 get as an invalid month (0 error), and my last name as an invalid city input to verify that the system correctly detects and handles invalid inputs.
+
+<br>
+
+
+
+## 5.White box test cases
+
+### if and if-else paths test
+
+| Function | Construct | Path | Test Data | Expected Result |
+|----------|-----------|------|-----------|-----------------|
+| get_meteorological_season | if` | Enter if valid country | "Australia", "january" | summer |
+| get_meteorological_season | if  | Skip if invalid country| "XYZ", "january" |invalid country |
+| compare_with_perth | if elif else | Warmer path  | "Adelaide", 25.0, "afternoon"| show warmer |
+
+- I used this approach  each if statement create two possible paths to the code.The program can  go inside the if block when the condition  true or skip it when the condition  false. I test both paths to make sure the module works correctly each case.for example,get_meteorological_season, I test a valid country to enter the if block and an invalid country to trigger error handling path
+
+
+
+<br>
+
+
+
+### Loop paths tests
+
+| Function | Construct | Path | Test Data | Expected Result |
+|----------|-----------|------|-----------|-----------------|
+| get_meteorological_season  | for loop  | enter loop and finds match| "Australia", "January" | summer |
+| get_meteorological_season | for loop   | exit loop when no match | "Australia", "XYZ"  |invalid month |
+
+
+- I used this approach loops have two main paths one the loop does not run at all, and loop runs once or multiple times treated as the same.for for loop  get_meteorological_season I test both cases when the loop runs and finds a matching season, and when it runs but does not find a match, which leads to the error case for an invalid month.
+
+
+
+<br>
+
+
+### exception tests
+
+| Function  | Construct  | Path  | Test Data  | Expected Result  |
+|----------|-----------|------|----------- |-----------------|
+| check_city_temperature | try except | try success | "Perth", 25.5, "morning" | returns temperature analysis |
+| check_city_temperature |  try except | expect typeerror  | "Perth", none, "morning" | returns error message |
+| check_city_temperature  | try except | expect valueerror   | "Perth", "abc", "morning"  | returns error message   |
+
+
+
+
+
+
+<br>
+
+
+
+
+## Test implementation 
+
+### run Tests
+
+- go to code directory
+
+```bash
+cd code/
+```
+- run all test
+
+```bash
+python -m unittest discover 
+```
+- run test separete files
+
+```bash
+python -m unittest test_season.py
+python -m unittest test_tempreture.py
+```
+
+- run test files with details
+
+```bash
+python -m unittest -v
+```
+
+
+![All tests](images/all_test.png)
+![test season](images/test_season.png)
+![test tempreture](images/test_tempreture.png)
+![test with details](images/details.png)
+
+<br>
+
+
+## Traceability matrix
+
+| Module Name     | BB (EP)     | BB (BVA)   | WB | Data types | Form of input and output | EP | BVA | White-Box |
+|-------------|---------|----------|-----|-------------|----------------------|-----|-----|-----------|
+| get_meteorological_season |  done |  done | done    | string, int | parameter , return value | done | done    | done  |
+| get_traditional_season  | done  | not done    | not done | string  | parameter , return value| done | not done    | not done |
+| check_seasons_same   | done  | not done | done   | string, int, bool  | parameter ,console output and return value   | done  | not done  | done | 
+| check_city_temperature  | done    | done    | done  | string, int, float  | parameter , return value| done  | done | done |
+| compare_with_perth | done  | not done  | done | string, int, float  | parameter , return value  | done  | not done | done |
+ 
+
+
+<br>
+
+
+
+##version Control
+
+### 8.1 Git Repository Information
+
+**Repository Name:** `Prathapasinghe_Mihin_Methsara_23590102_ISErepo`
+
+**Branch Structure:**
+
+| Branch | Purpose |
+|--------|---------|
+| `main` | Initial project structure |
+| `feature/season` | Season functionality development |
+| `feature/temperature` | Temperature functionality development |
+| `feature/testing` | Test development |
+| `feature/refactoring` | Final refactored code (submission branch) |
+
+### 8.2 Git Log
 
 
 
