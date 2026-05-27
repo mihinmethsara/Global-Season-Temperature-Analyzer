@@ -1,0 +1,4 @@
+Season Comparison Result
+Australia in January: Summer
+Japan in January: Winter
+Result: different seasons - Australia has Summer, Japan has Winter
