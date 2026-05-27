@@ -1,3 +1,270 @@
+##  <u>Introduction</u>
+
+This report explains the design, development, and testing of an educational software application that teaches users about seasonal changes in different cultures and temperature differences between cities.
+
+### Deliverables
+
+The system is designed to handle two key use cases:
+
+**Scenario A  – Finding seasons**
+- Given a country and month, return the meteorological season
+- Given Australia and a month, return the traditional noongar season
+- Given two countries and a month, determine if their seasons are the same
+
+**Scenario B – Temperature analysis**
+- Given a city, temperature, and time of day, compare with average temperature
+- Display warning if temperature difference by more than 6°c
+- Compare any city's temperature with perth's average
+
+
+### Key Achievements
+
+- modular python seven files following high cohesion and low coupling
+- unit tests covering equivalence partitioning, boundary value analysis, and white-box path testing
+- Complete test use for parameter, keyboard, and file inputs
+- Complete test use return, console, and file outputs
+- Student data test ID digits (1,0,2) and last name (Prathapasinghe)
+- Full git version control with refactoring and mergr parts history
+
+
+
+## <u>Production code design and module descriptions</u>
+
+### Design Decisions
+
+I designed the system by organizing it into clear, separate seven modules. The project is divided into logical parts, where each file represents a different feature or function of the application with following module principles.
+
+
+- High cohesion : Each module does one specific job, so the code is easier to understand and test.
+- Low coupling : Modules work independently and share data only through function inputs and imports, not global variables.
+- No redundancy : Common validation code is placed in input_validator.py so it is not repeated multiple places.
+- Clear dependency direction: Higher-level modules like season_finder.py and temperature_analyzer.py use lower-level modules like input_validator.py and data. This keeps dependencies in one direction only and avoids loops, making the code easier to manage.
+
+
+
+### Module 1 - Season finder (`season_finder.py`)
+
+| Property | Description |
+|----------|-------------|
+| Purpose | Find meteorological/monsoon season for any supported country |
+| Imports | country(string), month (string or int) with parameter passing |
+| Exports | Season name (string) or error message it is return value |
+| Behaviour | Normalizes inputs, validates country and month, searches season dictionary and returns matching season |
+| Dependencies | data py, input_validator.py |
+| Exceptions | Returns error messages so no exception raising |
+
+
+
+### Module 2- Traditional season finder (`season_finder.py`)
+
+| Property | Description |
+|----------|-------------|
+| Purpose | Find traditional noongar season for australia |
+| Imports | country(string), month(string or int) use parameter passing |
+| Exports | Season name(string) or error message  |
+| Behaviour | Only works for australia to find, returns "No traditional season" for other countries |
+| Dependencies | data.py, input_validator.py|
+| Exceptions | only returns error strings|
+
+
+
+
+### Module 3 - Season comparator (`season_comparator.py`)
+
+| Property | Description |
+|----------|-------------|
+| Purpose | Compare seasons of two countries |
+| Imports | country1 ,country2(strings), month(string orint) |
+| Exports | Boolean (true or false) and console output |
+| Behaviour | calls module 1 for both countries  and prints comparison and returns reult |
+| Dependencies | season_finder.py |
+| Exceptions | No exceptions raised and return false if country or month is invalid |
+
+
+### Module 4- Temperature analyzer(`temperature_analyzer.py`)
+
+| Property | Description |
+|----------|-------------|
+| Purpose | Compare temperature with city average |
+| Imports | city(string), tempreture(float,int), time of day(string) |
+| Exports | message(string) or error message |
+| Behaviour | Validates city,time and  checks temperature range with data compares with average, adds warning if  difference > 6°C |
+| Dependencies | data.py, input_validator.py |
+| Exceptions | no exceptions raised and use try except internally to catch typeerror and valueerror, but returns error strings instead of raising exceptions like "error- temperature cannot be none", |
+
+### Module 5 - Perth comparator (`perth_comparator.py`)
+
+| Property | Description |
+|--------------|-----------------|
+| Purpose | Compare any city's temperature with perths average |
+| Imports | city(string) , tempreture (float,int), time of day (string)  |
+| Exports | result message (string)  |
+| Behaviour | Validates inputs then retrieves perth average and compare it with given cites and  returns comparison result |
+| Dependencies | data.py, input_validator.py |
+| Exceptions |  Returns error strings- "invalid city", "invalid time of day" |
+
+
+
+### Module 6 - Input validator (`input_validator.py`)
+
+| Property | Description |
+|----------|-------------|
+| Purpose | Centralized validation parts for all modules |
+| Imports | Various data including country, month, city, time, tempreture|
+| Exports | Normalized values or boolean results  |
+| Behaviour | Normalizes country, month, city, and time inputs; checks them against definrd data and ensures values are within valid ranges. |
+| Dependencies | data.py|
+| Exceptions |  validate_month_strict() raises exceptions for invalid inputs, such as typeerror when the input is none and value error when the month value is not valid. Other functions handle errors by returning none or error messages instead of raising exceptions. |
+
+
+
+### Module 7 - Data (`data.py`)
+
+| Property | Description |
+|----------|-------------|
+| Purpose | Centralized data  |
+| Imports | None |
+| Exports | data dictionaries for imported for other modules |
+| Behaviour | Stores season data, temperature averages and  ranges |
+
+
+
+### Assumptions I made from my modules
+
+- Month inputs can be given as full names,  numbers (1–12) to support different user input styles.
+
+- Temperature values are assumed to be accurate up to one decimal place, as defined in the specification.
+
+- Traditional (Noongar) seasons are only applicable to Australia; for other countries, the system returns a message indicating no traditional season is available.
+
+- The system supports only a fixed set of countries: Australia, Sri Lanka, Japan, Mauritius, Malaysia, and Spain.
+
+- Supported cities are limited to Perth, Adelaide, and Brisbane based on the project requirements.
+
+- Valid temperature ranges are defined in city_Ranges, and any value outside these limits  treate as invalid input.
+
+- A significant difference warning  triggered only when the temperature difference is greater than 6°C but not equal to 6°C.
+
+- Input validation most  handled using error messages instead of exceptions to keep the program user friendly and prevent crashes.
+
+
+## <u>Production code implementation </u>
+
+### Run the program to view module output
+
+- go to code directory
+
+```bash
+cd code/
+```
+- run main program
+
+```bash
+python main.py 
+```
+
+![Menu](images/menu.png)
+
+
+### Modularity concepts how I apply for production code
+
+- **High Cohesion** - Each module is designed to focus on one clear task only. For example my code season_finder.py is responsible only for finding seasons and  temperature_analyzer.py is responsible only for analyzing temperature data also input_validator.py handles only input validation. This separation keeps the code organized, easier to understand, and simpler to test  and update.
+
+
+- **Low coupling** - this maintained in my design by keeping modules independent from each other. Modules communicate only through function inputs and return values, not global variables, so changes in one module do not affect others. My code uses no global variables, and all functions take inputs through parameters like get_meteorological_season(), check_city_temperature(), and compare_withperth(), and return results like season names or messages instead of changing shared data.
+
+
+- **No redundancy** - this applied in my design by writing common validation code once in input_validator.py and reusing it in other modules. like normalize_month() and normalize_time() are defined in input_validator.py and used in season_finder.py, temperature_analyzer.py, and perth_comparator.py. This avoids repeating code, reduces duplication, and makes the system easier to maintain.
+
+<br>
+
+### Review checklist before refactor (initial Code) 
+
+- Here is how my initial code looked before- overall worked but was not very modular. It failed some checklist parts
+
+**1. Single responsibility : <u>no </u>**
+- I had season logic mixed with comparison logic in the same file. Temperature analysis and Perth comparison were also together. Validation code was scattered across different modules instead of being in one place.
+
+**2. No global variables : <u>no  </u>**
+- I used hardcoded values like "Summer", "Winter", and "Perth" directly inside functions instead of storing them as constants. This means some data is written inside the logic code rather than being separated into a data file
+
+
+**3. No control flags : <u>yes </u>**  
+- I did not use boolean parameters to change function behavior.
+
+**4 parameters6 or fewer : <u>yes </u>**
+- my functions already had 2-3 parameters, so this was fine.for example, get_meteorological_season(country, month) has 2 parameters, and check_city_temperature(city, temp, time_of_day) has 3 parameters.
+
+**5. No code duplication : <u>no </u>**
+- month validation was repeated in multiple modules. City validation was also duplicated. There was no central validator module, so the same checking logic appeared in several places.
+
+
+
+
+
+<br>
+
+
+### Refactoring decisions 
+
+Based on the my review checklist, I improved the production code with the following changes-
+
+- **Moved data to data .py:** 
+All season mappings, temperature values, and validation lists were moved into one file instead of being written inside functions. This removed hardcoded values and made data easier to update.
+
+- **Centralized validation in input_validator.py:**
+ All input checks like country, month, city, and time normalization were written once and reused across modules. This reduced duplication and followed a consistent validation approach.
+
+- **Split into separate modules:** 
+The code was divided into smaller modules (season_finder.py, season_comparator.py, temperature_analyzer.py, and perth_comparator.py), where each module has one clear purpose.
+
+- **Separated user interaction:** 
+Input and output handling were removed from logic modules and placed in main.py, so core modules only focus on processing data.
+Added file output feature: A function was added to write season comparison results to a file for testing and output verification.
+
+
+<br>
+
+###  Review checklist after refactor -final parts 
+
+- After refactoring, here  how my code improved-
+
+**1. Single responsibility : <u>yes </u>** 
+ - now each module does only one job. season_finder.py only finds seasons. season_comparator.py only compares seasons. temperature_analyzer.py only analyzes temperatures. perth_comparator.py only compares with perth. and input_validator.py only validates inputsalso  data.py only stores constants. main.py only handles the menu and user interface.
+
+**2. No global variables : <u>yes </u>** 
+- all hardcoded values are now in data.py with UPPER_CASE constant names. No magic strings exist in the logic modules anymore. Everything is imported from the data file.
+
+**3. No control flags : <u>yes </u>** 
+- I kept this  from the beginning.
+
+
+**4 parameters6 or fewer : <u>yes </u>** – my functions alredy have 1-3 parameters with initial.
+
+**5. No code duplication : <u>yes </u>** 
+- all validation logic is now written once inside input validator file. Functions like normalize_month(), normalize_city, and normalize_time are defined in one place and reused by season finder, temperature analyzer, and perth comparator. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ## Module Descriptions
 
 I identified three main modules for the season functionality following good modularity principles taught high cohesion and low coupling. Each module has a single, well-defined responsibility.
