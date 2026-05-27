@@ -414,23 +414,49 @@ python -m unittest -v
 
 
 
-##version Control
+## Version control
 
-### 8.1 Git Repository Information
+### Git repository information
 
-**Repository Name:** `Prathapasinghe_Mihin_Methsara_23590102_ISErepo`
+**Repository name:** `Prathapasinghe_Mihin_Methsara_23590102_ISErepo`
 
-**Branch Structure:**
+**Branch structure-**
 
-| Branch | Purpose |
-|--------|---------|
-| `main` | Initial project structure |
-| `feature/season` | Season functionality development |
-| `feature/temperature` | Temperature functionality development |
-| `feature/testing` | Test development |
-| `feature/refactoring` | Final refactored code (submission branch) |
+- **main** - Initial project structure 
+- **feature/season** - Season functionality development 
+- **feature/temperature** - Temperature functionality development 
+- **feature/testing** - Test development |
+- **feature/refactoring** - Final refactored code
 
-### 8.2 Git Log
+### Git log
+
+
+
+
+
+
+
+### Branch merge steps
+
+
+**1. feature / season** – Developed intial season functions meteorological and traditional seasons
+
+**2. feature / temperature** – Developed temperature initial functions temperature analysis and perth comparison
+
+**3. feature / testing** – Developed unit tests files
+
+**4. feature / documentation**  – Make  the report and documentation in markdown format
+
+**5. feature / refactoring**  – Create as  integration branch for code. merged feature/season, feature/temperature , and  feature/testing  into this branch, then applied refactoring.
+
+**6. develop**  – created as main integration branch. Merged feature/refactoring (production code and test code) and  feature/documentation branches to this branch for test submission
+
+**7. main**  – Final merge from develop branch for submission
+
+**Merges confirmed in git log:**
+- `56839af` – Merged `feature/season` into `feature/refactoring`
+- `022e626` – Merged `feature/temperature` into `feature/refactoring`
+- `2cb5808` – Merged `feature/testing` into `feature/refactoring`
 
 
 
