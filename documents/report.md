@@ -10,14 +10,10 @@
 
 **Semester:** 2026 Semester 1
 
-
-
-
-## Project Overview
-This project is a software system developed to analyze season and temperature data.  
-It is built using modular design, testing techniques, and good software engineering practices.
+<br>
 
 ---
+<br>
 
 ##  <u>Introduction</u>
 
@@ -226,6 +222,8 @@ python main.py
 <br>
 
 
+
+
 ### Refactoring decisions 
 
 Based on the my review checklist, I improved the production code with the following changes-
@@ -379,7 +377,7 @@ Added file output feature: A function was added to write season comparison resul
 <br>
 
 
-
+<br>
 
 ## <u>Test implementation </u>
 
@@ -447,13 +445,17 @@ python -m unittest -v
 - **feature/testing** - Test development |
 - **feature/refactoring** - Final refactored code
 
+-![git branches](images/git_branch.png)
+
 ### Git log
 
+-![git log](images/git_log.png)
+
+-![git log](images/git_log_graph.png)
 
 
 
-
-
+<br>
 
 ### Branch merge steps
 
@@ -472,10 +474,8 @@ python -m unittest -v
 
 **7. main**  – Final merge from develop branch for submission
 
-**Merges confirmed in git log:**
-- `56839af` – Merged `feature/season` into `feature/refactoring`
-- `022e626` – Merged `feature/temperature` into `feature/refactoring`
-- `2cb5808` – Merged `feature/testing` into `feature/refactoring`
+### Merges confirmed in git log:
+-![Mergge branches](images/merge_branches.png)
 
 
 
