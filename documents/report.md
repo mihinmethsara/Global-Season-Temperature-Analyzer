@@ -1,3 +1,24 @@
+# Introduction to Software Engineering Assignment
+
+---
+
+**Assessment:** Introduction to Software Engineering - ISAD1000 Assignment
+
+**Student Name:** Mihin Methsara Prathapasinghe
+
+**Student ID:** 23590102
+
+**Semester:** 2026 Semester 1
+
+
+
+
+## Project Overview
+This project is a software system developed to analyze season and temperature data.  
+It is built using modular design, testing techniques, and good software engineering practices.
+
+---
+
 ##  <u>Introduction</u>
 
 This report explains the design, development, and testing of an educational software application that teaches users about seasonal changes in different cultures and temperature differences between cities.
@@ -254,8 +275,6 @@ Added file output feature: A function was added to write season comparison resul
 
 
 
-
-
 ## <u>Test cases for all parts </u>
 
 ## Black box test cases
@@ -362,7 +381,7 @@ Added file output feature: A function was added to write season comparison resul
 
 
 
-## Test implementation 
+## <u>Test implementation </u>
 
 ### run Tests
 
@@ -398,7 +417,7 @@ python -m unittest -v
 <br>
 
 
-## Traceability matrix
+## <u>Traceability matrix</u>
 
 | Module Name     | BB (EP)     | BB (BVA)   | WB | Data types | Form of input and output | EP | BVA | White-Box |
 |-------------|---------|----------|-----|-------------|----------------------|-----|-----|-----------|
@@ -414,7 +433,7 @@ python -m unittest -v
 
 
 
-## Version control
+## <u>Version control</u>
 
 ### Git repository information
 
@@ -462,68 +481,45 @@ python -m unittest -v
 
 
 
+<br>
 
 
-## Module Descriptions
 
-I identified three main modules for the season functionality following good modularity principles taught high cohesion and low coupling. Each module has a single, well-defined responsibility.
-
-### Module1:
-
-**Module Name:** `get_meteorological_season`
-
-**Purpose:** Returns the meteorological season for a given country and month based on figure1.
-
-**Imports:** 
-- country(string taken to module with keyboard input)
-- month(string or integer take directly whe function called with parameter passing)
-
-**Exports:**
-- Season name as string return value
-
-**Behaviour:**  Finds the meteorological season for a given country and month based on Figure 1 and returns the season name. It uses a dictionary containing data(add to same code ) from figure 1 for six countries.Returns "Invalid country" or "Invalid month" for error cases.
-
-**Dependencies:** None
-
-**Exceptions:** Handles invalid inputs by returning error messages as strings instead of raising exceptions.This approach keeps the modules simple and easy to test.
+## <u>Challenges faced</u>
 
 
-### Module 2:
+- **Ensuring test isolation and cleanup** – Implemented setUp and tearDown fixtures that automatically delete temporary files after each test
 
-**Module name**: `get_traditional_season`
+- **Avoiding code duplication across season and temperature modules** – Created shared input_validator.py  module that both modules use for validation
 
-**Purpose:** Returns the traditional Noongar season for Australia based on figure1.
+- **White box testing for exception paths** – Added validate_month_strict() function that raises type error and value error  exceptions
 
-**Imports:** 
-- country (string using parameter passing)
-- month (string or integer using parameter passing)
+- **Did not create  develop  branch at the beginning** – Created  develop branch at the end, merged  feature/refactoring  and  feature/documentation  into it for for test before submission , then merged develop into main branch for final submission
 
-**Exports:**
-- Season name return string  or  retun message "no traditional season for this country" or "no traditional season for this month"
 
-**Behaviour:** Finds the traditional Noongar season for Australia based on figure1 and returns the season name.
 
-**Dependencies:** None
+<br>
 
-**Exceptions:** Handled by returning error messages.
 
-### Module 3:
 
-**Module Name:** `check_seasons_same`
+## <u>Discussion things I achieve</u>
 
-**Purpose:** Compares meteorological seasons of two countries for a given month.
 
-**Imports:** use parameter prassing with function 
-- country1 and country2(string)
-- month (string or integer)
+**1.Full functionality implemented –** All assignment requirements were completed and tested, including finding seasons, comparing seasons between countries, checking temperature differences against averages, and showing warnings when the temperature difference is more than 6°C.
 
-**Exports:** 
-- Boolean value return,true if same season,false if different or invalid 
-- Prints comparison result 
+**2. Modular design –** The system is split into seven modules (data.py, input_validator.py, season_finder.py, season_comparator.py, temperature_analyzer.py, perth_comparator.py, and main.py). Each module has one clear responsibility, making the system easier to understand, test, and maintain.
 
-**Behaviour:**  Uses module 1 to get meteorological seasons for both countries, compares them, and returns true if same season, false if different or invalid.
+**3. Comprehensive testing –** I used three testing methods: equivalence partitioning, boundary value analysis, and white-box testing. These tests cover different input types, input methods, and output methods.
 
-**Dependencies:** Module 1: get_meteorological_season
+**Version control –** I used git with feature branches to manage development work in an organized way, and all changes are tracked with clear commit messages.
 
-**Exceptions:** Handles invalid inputs by returning false and printing error messages instead of raising exceptions. This approach keeps the module simple and easy to test.
 
+
+
+<br>
+
+
+## <u>Conclusion</u>
+
+- I successfully built and tested the system. It follows good design practices like splitting the code into module s, giving each module one clear job, and avoiding duplicate code. I used different testing methods, including black box and white box testing, to check that everything works correctly.Also I used git  with feature branches to manage the project and track changes.
+Overall, my project meets all requirements and works as expected.
