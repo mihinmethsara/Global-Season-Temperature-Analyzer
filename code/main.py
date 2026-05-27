@@ -2,7 +2,7 @@ import season_finder
 import season_comparator
 import temperature_analyzer
 import perth_comparator
-import season_comparator 
+
 
 
 def main():

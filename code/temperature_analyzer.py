@@ -40,3 +40,7 @@ def check_city_temperature(city, temp, time_of_day):  #use parameter pass
 
 
 
+def print_city_temperature(city, temp, time_of_day): #Print  for console output testing
+    result = check_city_temperature(city, temp, time_of_day)
+    print(result)
+    return result

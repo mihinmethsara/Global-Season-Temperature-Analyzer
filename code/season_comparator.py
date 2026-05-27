@@ -32,7 +32,7 @@ def compare_seasons_with_output_file(country1, country2, month, output_file):
     season2 = get_meteorological_season(country2, month)
 
     
-    with open(f"code/{output_file}", 'w') as f:
+    with open(output_file, 'w') as f:
         f.write(f"Season Comparison Result\n")
         f.write(f"{country1} in {month}: {season1}\n")
         f.write(f"{country2} in {month}: {season2}\n")

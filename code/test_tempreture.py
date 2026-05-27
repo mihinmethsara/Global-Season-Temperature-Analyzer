@@ -11,12 +11,13 @@ class TestTemperatureAnalyzer(unittest.TestCase):
     
     def setUp(self):
         self.input_file = "test_temp_input.txt"
-        self.output_file = "test_temp_output.txt"
+        self.output_file = "test_output.txt"
+        
     
     def tearDown(self):
         sys.stdin = sys.__stdin__
         sys.stdout = sys.__stdout__
-        for f in [self.input_file, self.output_file]:
+        for f in [self.input_file,self.output_file]:
             if os.path.exists(f):
                 os.remove(f)
 
@@ -231,7 +232,18 @@ class TestTemperatureAnalyzer(unittest.TestCase):
 
         result = temperature_analyzer.check_city_temperature(city, temp, time)
         self.assertIn("above", result, "file input should return above average")
+   
+        with open(self.output_file, "w") as f:
+            f.write(f"{city} at {temp}°C in {time}: {result}\n")
     
+    
+        with open(self.output_file, "r") as f:
+            content = f.read()
+    
+     
+        self.assertIn("Perth", content)
+        self.assertIn("25.0", content)
+        self.assertIn("above", content)
        
        
        #data type tests 

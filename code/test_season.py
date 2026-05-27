@@ -124,36 +124,34 @@ class TestSeasonFinder(unittest.TestCase):
                      "Console output should show Australia season")
                      
     
-       #file input test
+       #file input and output test
     
     def test_file_input(self):
-        with open(self.input_file, "w") as f:
-            f.write("Australia,January")
-        with open(self.input_file, "r") as f:
-            country, month = f.read().split(',')
-        result = season_finder.get_meteorological_season(country, month)
-        self.assertEqual("Summer", result, "File input should return Summer")
+    
+       with open(self.input_file, "w") as f:
+           f.write("Australia,January")
+       with open(self.input_file, "r") as f:
+           country, month = f.read().split(',')
+
+          #test with production code
+
+       result = season_finder.get_meteorological_season(country, month)
+       self.assertEqual("Summer", result, "File input should return Summer")
+
+
+       with open(self.output_file, "w") as f:  
+         f.write(f"{country} in {month}: {result}\n")
 
     
-     #file output test
+       with open(self.output_file, "r") as f:
+         content = f.read()
     
-    def test_file_output(self):
-        
-        # Write data to output file
-        with open(self.output_file, "w") as f:
-            f.write("Season Comparison Result\n")
-            f.write("Australia in January: Summer\n")
-            f.write("Japan in January: Winter\n")
-
-        
     
-        with open(self.output_file, "r") as f:
-            content = f.read()
-        
-        self.assertIn("Summer", content, "File should contain Summer")
-        self.assertIn("Winter", content, "File should contain Winter")
-        self.assertIn("Australia", content, "File should contain Australia")  #file deleted afte test with teardown
-        
+       self.assertIn("Australia", content)
+       self.assertIn("Summer", content)
+       self.assertIn("January", content) #file deleted afte test with teardown
+    
+   
        
     
        #exception tests
