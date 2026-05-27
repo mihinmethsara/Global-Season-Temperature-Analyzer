@@ -4,6 +4,7 @@ import sys
 import unittest
 import season_finder
 import season_comparator
+import input_validator
 
 
 class TestSeasonFinder(unittest.TestCase):
@@ -101,7 +102,29 @@ class TestSeasonFinder(unittest.TestCase):
         self.assertEqual("Invalid month", result, "Loop should exit without match")
 
     
+      #loop skip path test
+    def test_wb_loop_skip_path(self):
+       
+        result = season_finder.get_meteorological_season("", "January")
+        self.assertEqual("Invalid country", result, "Skip path: empty country")
     
+
+    
+    def test_wb_try_except_paths(self):  #exception test
+    
+        result = input_validator.validate_month_strict(5)
+        self.assertEqual(5, result, "try: valid month returns value")
+    
+        with self.assertRaises(TypeError, msg="except typeerror path: None should raise typeerror"):
+          input_validator.validate_month_strict(None)
+
+    
+    
+        with self.assertRaises(ValueError, msg="except valueerror path: 'January' should raise valueerror"):
+           input_validator.validate_month_strict("January")
+    
+    
+
         #keyboard input test
     
     def test_keyboard_input(self):
@@ -146,7 +169,7 @@ class TestSeasonFinder(unittest.TestCase):
        with open(self.output_file, "r") as f:
          content = f.read()
     
-    
+
        self.assertIn("Australia", content)
        self.assertIn("Summer", content)
        self.assertIn("January", content) #file deleted afte test with teardown
@@ -154,17 +177,18 @@ class TestSeasonFinder(unittest.TestCase):
    
        
     
-       #exception tests
+       #return string error tests
     
-    def test_exception_none_country(self):
+    def test_stringerror_none_country(self):
         result = season_finder.get_meteorological_season(None, "January")
         self.assertEqual("Invalid country", result, "None country should return error")
+
     
-    def test_exception_empty_country(self):
+    def test_stringerror_empty_country(self):
         result = season_finder.get_meteorological_season("", "January")
         self.assertEqual("Invalid country", result, "Empty country should return error")
     
-    def test_exception_none_month(self):
+    def test_stringerror_none_month(self):
         result = season_finder.get_meteorological_season("Australia", None)
         self.assertEqual("Invalid month", result, "None month should return error")
 

@@ -1,5 +1,5 @@
 from data import CITY_AVERAGES
-from input_validator import normalize_city, normalize_time, is_valid_city, is_valid_time
+from input_validator import normalize_city, normalize_time, is_valid_city
 
 
 def compare_with_perth(city, temp, time_of_day): #parameter pass

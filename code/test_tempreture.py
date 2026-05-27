@@ -178,20 +178,53 @@ class TestTemperatureAnalyzer(unittest.TestCase):
         self.assertNotIn("Significant difference", result_small, "Nested IF skipped: difference <= 6")
     
 
-    def test_wb_perth_comparison_paths(self):
-        
-        result_warmer = perth_comparator.compare_with_perth("Adelaide", 25.0, "afternoon")
-        self.assertEqual("Adelaide is warmer than Perth", result_warmer)
-        
+     #use nested if
 
-        result_cooler = perth_comparator.compare_with_perth("Adelaide", 20.0, "afternoon")
-        self.assertEqual("Adelaide is cooler than Perth", result_cooler)
-        
+    def test_compare_warmer_than_perth(self):
        
-        result_same = perth_comparator.compare_with_perth("Adelaide", 23.0, "afternoon")
-        self.assertEqual("Adelaide is the same as Perth", result_same)
+       result = perth_comparator.compare_with_perth("Adelaide", 25.0, "afternoon")
+       self.assertEqual("Adelaide is warmer than Perth", result)
+
+    def test_compare_cooler_than_perth(self):
+        
+       result = perth_comparator.compare_with_perth("Adelaide", 20.0, "afternoon")
+       self.assertEqual("Adelaide is cooler than Perth", result)
+
+    def test_compare_same_as_perth(self):
+
+        result = perth_comparator.compare_with_perth("Adelaide", 23.0, "afternoon")
+        self.assertEqual("Adelaide is the same as Perth", result)  
+
+
+
+      #exception test part
+
+    def test_wb_try_except_try(self):
     
-      
+         result = temperature_analyzer.check_city_temperature("Perth", 25.5, "morning")
+    
+         self.assertIn("25.5°C", result, "Try: valid temperature should be processed")
+         self.assertNotIn("Error:", result, "try path: no error message")
+
+
+    def test_wb_try_except_typeerror(self):
+
+          result = temperature_analyzer.check_city_temperature("Perth", None, "morning")
+    
+          self.assertIn("Error:", result, "expect typeerror: should return error")
+          self.assertIn("None", result, "expect typeerror: should mention None")
+
+
+
+    def test_wb_try_except_valueerror(self):
+    
+           result = temperature_analyzer.check_city_temperature("Perth", "abc", "morning")
+     
+           self.assertIn("Error:", result, "expect valueerror: should return error")
+           self.assertIn("abc", result, "expect valuerror: should show invalid input")
+
+
+   
       
       #keyboard input test
     
@@ -218,11 +251,13 @@ class TestTemperatureAnalyzer(unittest.TestCase):
         sys.stdout = sys.__stdout__
         output = captured.getvalue()
         self.assertIn("above", output, "Console output should show above average")
+
     
 
       #file input test
     
     def test_file_input_temperature(self):
+
  
         with open(self.input_file, "w") as f:
             f.write("Perth,25.0,morning")
@@ -267,7 +302,7 @@ class TestTemperatureAnalyzer(unittest.TestCase):
         self.assertIsInstance(result, str, "Temperature functions should return strings")
 
          
-         #exception test part
+         #string error test
     
     def test_exception_none_city(self):
       
@@ -287,24 +322,25 @@ class TestTemperatureAnalyzer(unittest.TestCase):
     #last name: Prathapasinghe
     
     def test_student_id_digit_1_temperature(self):
-        """Student ID digit 1 as temperature (1.0°C)"""
+       
         result = temperature_analyzer.check_city_temperature("Perth", 1.0, "morning")
         self.assertIn("below", result, "ID digit 1: 1.0°C should be below average")
     
     def test_student_id_digit_0_temperature(self):
-        """Student ID digit 0 as temperature (0.0°C)"""
+      
         result = temperature_analyzer.check_city_temperature("Perth", 0.0, "morning")
         self.assertIn("below minimum", result, "ID digit 0: 0.0°C is below Perth minimum")
     
     def test_student_id_digit_2_temperature(self):
-        """Student ID digit 2 as temperature (2.0°C)"""
         result = temperature_analyzer.check_city_temperature("Perth", 2.0, "morning")
         self.assertIn("below", result, "ID digit 2: 2.0°C should be below average")
     
     def test_student_last_name_as_city(self):
-        """Last name as city should be invalid"""
+       
         result = temperature_analyzer.check_city_temperature("Prathapasinghe", 25.0, "morning")
         self.assertEqual("Invalid city", result, "Last name as city should return Invalid city")
+
+
 
 
 if __name__ == "__main__":

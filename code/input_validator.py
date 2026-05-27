@@ -38,6 +38,7 @@ def normalize_month(month):
         return None
     
 
+
      #handle string
     if isinstance(month, str):
         month_str = month.strip().title()
@@ -56,6 +57,7 @@ def normalize_month(month):
         return None
     
     return None
+
 
 
 def is_valid_month(month): #check month valid
@@ -83,13 +85,10 @@ def normalize_time(time): #standardize time of day"
         return None
     if isinstance(time, str):
         result = time.strip().lower()
-        return result if result in VALID_TIMES else None
+        return result if result in VALID_TIMES else None #check time is morning or afternoon
     return None
 
 
-
-def is_valid_time(time): #check time is morning or afternoon
-    return normalize_time(time) is not None
 
 
 def is_temperature_in_range(city, temp):
@@ -112,3 +111,23 @@ def get_temperature_range_message(city, temp): #if temperature out of range mess
     if temp > range_data["max"]:
         return f"Temperature {temp}°C is above maximum ({range_data['max']}°C) for {norm_city}"
     return None
+
+
+
+def validate_month_strict(month):
+ 
+    try:
+       
+        month_int = int(month)
+        
+        if 1 <= month_int <= 12:
+            return month_int
+        else:
+            raise ValueError(f"Month {month_int} is out of range (1-12)") #if not range 
+            
+    except TypeError:
+       
+        raise TypeError(f"Month must be a number, got {type(month).__name__}")
+        
+    except ValueError:
+        raise ValueError(f"Invalid month value: {month}")

@@ -1,5 +1,5 @@
 from data import CITY_AVERAGES
-from input_validator import ( normalize_city, normalize_time, is_valid_city, is_valid_time,
+from input_validator import ( normalize_city, normalize_time, is_valid_city, 
                              get_temperature_range_message)
 
 
@@ -16,7 +16,23 @@ def check_city_temperature(city, temp, time_of_day):  #use parameter pass
     if time_norm is None:
         return "Invalid time of day. Use morning or afternoon"
     
-    # Check temperature range
+
+    try:
+        temp_float = float(temp)
+        
+    except TypeError:
+        return f"Error: Temperature cannot be None. Expected a number, got {type(temp).__name__}"
+        
+    except ValueError:
+        return f"Error: '{temp}' is not a valid temperature. Please enter a number."
+    
+    except Exception:
+    
+        return "Error: Unexpected error occurred while reading temperature"
+    
+    
+    
+    #check temperature range
     range_msg = get_temperature_range_message(city_norm, temp)
     if range_msg:
         return range_msg
@@ -40,7 +56,7 @@ def check_city_temperature(city, temp, time_of_day):  #use parameter pass
 
 
 
-def print_city_temperature(city, temp, time_of_day): #Print  for console output testing
+def print_city_temperature(city, temp, time_of_day): #print  for console output testing
     result = check_city_temperature(city, temp, time_of_day)
     print(result)
     return result
