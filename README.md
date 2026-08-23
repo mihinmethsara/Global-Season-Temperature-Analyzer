@@ -7,7 +7,7 @@ A Python command line application for analyzing seasons and temperatures across 
 
 ## Features
 
-| **Category**                     | **Description**                                         |
+| **Category**                     | **Description**                                          |
 | --------------------------------- | ------------------------------------------------------- |
 | **Meteorological season lookup**  | Find the season for a country and month.                |
 | **Traditional season lookup**     | Find the Noongar season for Australia.                  |
@@ -47,6 +47,7 @@ cd code
 ```
 
 3. **Run the Application**:
+
 ```bash
 python main.py 
 ```
