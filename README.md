@@ -7,7 +7,7 @@ A Python command line application for analyzing seasons and temperatures across 
 
 ## Features
 
-| **Category**                     | **Description**                                        |
+| **Category**                     | **Description**                                         |
 | --------------------------------- | ------------------------------------------------------- |
 | **Meteorological season lookup**  | Find the season for a country and month.                |
 | **Traditional season lookup**     | Find the Noongar season for Australia.                  |
@@ -152,7 +152,7 @@ All test cases are documented and traceable in the project report(inside documen
 ## Development Notes
 
 - Developed using a feature branch git workflow (`feature/season`, `feature/temperature`, `feature/refactoring`, `feature/testing`, `feature/documentation`)
-- Merged into `develop`, then finalized into `main`
+- Merged to `develop` , then finalized into `main`
 - Traceability matrix included in project documentation(it inside document folder)
 
 ## Author
